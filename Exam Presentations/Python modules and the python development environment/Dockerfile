@@ -1,7 +1,14 @@
 FROM python
-COPY . /app
+
+COPY requirements.txt /app/setup/requirements.txt
+WORKDIR /app/setup
+RUN pip install -r requirements.txt
+
+COPY app.py /app/app.py
+COPY templates/. /app/templates
 WORKDIR /app
-RUN pip install -r numpyInstall.txt
-COPY testmodule.py /app
-CMD ["testmodule.py"]
-ENTRYPOINT ["python3"]
+
+EXPOSE 5000/tcp
+
+ENTRYPOINT ["python"]
+CMD ["app.py"]

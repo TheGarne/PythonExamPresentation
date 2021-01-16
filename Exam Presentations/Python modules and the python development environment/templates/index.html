@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to very personal magic box in Docker</title>
+</head>
+
+<body>
+  <h1 style="color: olivedrab" id="ip"></h1>
+  <p>Your location:</p>
+  <p id='location'></p>
+  <p>Your Coordinates</p>
+  <p id='coordinates'></p>
+  <p>You are totally safe here, nobody will steal your data</p>
+</body>
+
+<script>
+  fetch('/api/ipinfo')
+  .then(response => response.json())
+  .then(result => {
+    document.getElementById('ip').innerHTML = 'Your IP is: ' +  result.ip;
+    document.getElementById('location').innerHTML = result.city + ', ' + result.country_name;
+    document.getElementById('coordinates').innerHTML = "Longitude: (" + result.longitude + '), Latitude: (' + result.latitude + ")";
+  });
+</script>
+
+</html>
